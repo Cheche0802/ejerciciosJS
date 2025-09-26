@@ -45,7 +45,7 @@ const pedirCarta = () => {
     if (deck.length === 0) {
         throw 'No hay cartas en el deck';
     }
-    console.log('Carta pedida:', deck.pop());
+    //console.log('Carta pedida:', deck.pop());
     console.log(deck);
 
     return deck.pop();
@@ -60,7 +60,7 @@ const valorCarta = ( carta) => {
     //extrar el valor de la carta
     const valor = carta.substring(0, carta.length -1);
     
-    console.log({valor});
+    //console.log({valor});
     return (isNaN(valor) ) ?
             (valor === 'A') ? 11: 10
             : valor * 1 ;
@@ -71,14 +71,10 @@ const valorCarta = ( carta) => {
         console.log('Es un número');
         //se multiplica el valor por 1 para convertir valor de string a number
         puntos = valor * 1;
+            console.log(puntos);
     }*/
-
-
-
-    console.log(puntos);
-
-    
 
 }
 
-valorCarta('5D');
+const valor = valorCarta(pedirCarta());
+console.log(valor);

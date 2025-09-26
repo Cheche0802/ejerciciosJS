@@ -9,6 +9,10 @@ let deck         = [];
 const tipos      = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
 
+
+/*
+ *Crea un nuevo mazo de cartas
+ */
 const crearDeck = () => {
     
     for (let i = 2; i <= 10; i++) {
@@ -23,6 +27,8 @@ const crearDeck = () => {
         }
         
     }
+
+
     console.log(deck);
 
     deck = _.shuffle(deck);
@@ -32,3 +38,18 @@ const crearDeck = () => {
 }
 
 crearDeck();
+
+// Esta funcion me permite tomar una carta
+const pedirCarta = () => {
+
+    if (deck.length === 0) {
+        throw 'No hay cartas en el deck';
+    }
+    console.log('Carta pedida:', deck.pop());
+    console.log(deck);
+
+    return deck.pop();
+}
+
+pedirCarta();
+

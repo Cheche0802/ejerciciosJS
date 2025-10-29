@@ -15,9 +15,13 @@ let puntosComputadora = 0;
 //Referencias del HTML
 
 const btnPedir = document.querySelector('#btnpedir');
-const divCartasJugador = document.querySelector('#jugador-cartas')
+const btndetener = document.querySelector('#btndetener');
+const btnnuevo = document.querySelector('#btnnuevo');
 
-const puntosHTML = document.querySelectorAll('small')
+const divCartasJugador = document.querySelector('#jugador-cartas');
+const divCartasComputadora = document.querySelector('#computadora-cartas');
+
+const puntosHTML = document.querySelectorAll('small');
 
 
 /*
@@ -89,6 +93,42 @@ const valorCarta = ( carta) => {
 //const valor = valorCarta(pedirCarta());
 //console.log(valor);
 
+//turno de la computadora
+const turnoComputadora = (puntosMinimos) => {
+    
+    do {
+        const carta = pedirCarta();
+
+        puntosComputadora = puntosComputadora +  valorCarta(carta);
+        puntosHTML[1].innerText = puntosComputadora;
+
+        // <img class="carta" src="assets/cartas/2C.png" alt="" srcset="">-->
+
+        const imgCarta = document.createElement('img');
+        imgCarta.src = `assets/cartas/${carta}.png`;
+        imgCarta.classList.add('carta');
+        divCartasComputadora.append(imgCarta);
+
+        if (puntosMinimos > 21) {
+            break;
+        }
+    } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
+
+
+    setTimeout(() => {
+    
+        if (puntosComputadora === puntosMinimos ) {
+            alert('Nadie Ganó!!');
+        }else if(puntosMinimos > puntosComputadora) { 
+            alert('La computadora ganó');
+        }else if (puntosComputadora > 21) {
+            alert('Felicidades Ganaste');
+        }else{
+            alert('Felicidades Ganaste');
+        }
+    }, 10);
+}
+
 //Eventos
 btnPedir.addEventListener('click', () => {
 
@@ -105,10 +145,39 @@ btnPedir.addEventListener('click', () => {
     divCartasJugador.append(imgCarta);
 
     if (puntosJugador > 21 ) {
-        console.warn('Lio siento perdiste ');
+        console.warn('Lo siento perdiste ');
         btnPedir.disabled =true;
+        btndetener.disabled =true;
+        turnoComputadora(puntosJugador);
+
     }else if (puntosJugador === 21){
         console.warn('Ganastes!!! ');
         btnPedir.disabled =true;
+        btndetener.disabled =true;
     }
+
 });
+
+btndetener.addEventListener('click', () => {
+
+        btnPedir.disabled =true;
+        btndetener.disabled =true;
+        turnoComputadora(puntosJugador);
+});
+
+btnnuevo.addEventListener('click', () => {
+
+        btnPedir.disabled =false;
+        btndetener.disabled =false;
+        puntosHTML[0].innerText = 0;
+        puntosHTML[1].innerText = 0;
+        puntosJugador = 0;
+        puntosComputadora = 0;
+
+        divCartasComputadora.innerHTML = '';
+        divCartasJugador.innerHTML = '';
+        deck = [];
+        deck= crearDeck();
+});
+
+

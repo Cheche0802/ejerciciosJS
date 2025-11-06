@@ -1,6 +1,17 @@
 
 
 class Persona {
+
+    static _conteo = 0;
+
+    static get conteo(){
+        return Persona._conteo + 'intanticias'
+    }
+
+    static mensaje (){
+        console.log(this.nombre); //undefined
+        console.log('soy un metodo statico');
+    }
  //segun las reglas es 1 propiedades y metodos estaticos
     nombre = '';
     codigo = '';
@@ -14,6 +25,8 @@ class Persona {
         this.nombre = nombre;
         this.codigo = codigo;
         this.frase  = frase;
+        
+        Persona._conteo++;
     }
     //sets y gets
     set setComidaFavorita(comida) {
@@ -50,4 +63,15 @@ spiderman.setComidaFavorita = 'El pie de cereza de tia may';
 
 console.log(spiderman.getComidaFavorita);
 console.log(spiderman)
+
+
+//Persona._conteo = 2
+
+console.log('Conteo statico', Persona._conteo );
+console.log(Persona.conteo);
+
+Persona.mensaje();
+
+//
+Persona.propiedadExterna = 'Hola Mundo'
 

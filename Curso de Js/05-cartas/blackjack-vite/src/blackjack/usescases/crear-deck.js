@@ -1,10 +1,19 @@
 import _ from 'underscore'
 
-export miNombre = 'Fernando';
+//export miNombre = 'Fernando';
 
 // Esta función crea un nuevo deck
+/**
+ * 
+ * @param {Array<string>} tiposDeCarta 
+ * @param {Array<string>} tiposEspeciales 
+ * @returns {Array<string>}
+ */
 const crearDeck = (tiposDeCarta, tiposEspeciales) => {
 
+    if (!tiposDeCarta || tiposDeCarta.length === 0  )
+        throw new Error('TiposDeCarta es obligatorio');
+    
     let deck = [];
 
     for( let i = 2; i <= 10; i++ ) {
